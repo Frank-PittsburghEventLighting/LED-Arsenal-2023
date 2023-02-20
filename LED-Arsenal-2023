@@ -1,5 +1,6 @@
 //
-//  24 keys with presets and chases Tasks are handled with TaskManager software #include <TaskManagerIO.h> https://www.thecoderscorner.com/products/arduino-libraries/taskmanager-io/task-manager-scheduling-guide/
+//  24 keys with presets and chases Tasks are handled with TaskManager software #include <TaskManagerIO.h> 
+//  https://www.thecoderscorner.com/products/arduino-libraries/taskmanager-io/task-manager-scheduling-guide/
 //
 //  Keys are responsive with little latency Events are working smoothly presets
 //  and chases are working but will be improved overtime (My OCD)
@@ -9,8 +10,9 @@
 //  initialize
 #include <Wire.h>
 #include <IoAbstraction.h>
+#include <IoAbstractionWire.h>
 #include<TaskManagerIO.h>
-#include <KeyboardManagerFG.h>
+#include <KeyboardManager2023.h>
 //#include <FastLEDPainter.h>
 
 #include "FastLED.h"
@@ -735,7 +737,7 @@ void setup() {
 
   // create the keyboard mapped to arduino pins and with the layout chosen above.
   // it will callback our listener
-  keyboard.initialise(arduinoIo, &keyLayout, &myListener);
+  keyboard.initialise(asIoRef(internalDigitalDevice()), &keyLayout, &myListener);
 
   // start repeating at 850 millis then repeat every 350ms
   keyboard.setRepeatKeyMillis(850, 350);
