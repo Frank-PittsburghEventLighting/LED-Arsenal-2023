@@ -1,0 +1,50 @@
+String keyP = "";
+int KeyFG = 0, x = 0;
+char key2, key;
+int RBright, BBright, GBright, GreenVal, RedVal, BlueVal;
+int convKeyP = 11;
+int SpeedRate = 256;     //  Set SpeedRate 0-512  256=50%
+  int SpeedRate100 = 0;    //  Preset for ind. Keys Max Speed
+int brightnessDownButton, brightnessUpButton, speedUpButton, speedDownButton;
+int brightness = 128, brightnessRate, Speed;
+***************************************************************************
+  else if (  convKeyP == 94)   // Sample Key
+   {
+       key = keypad.getKey(); speedAndBrightnessControl();
+      if ((key) && (key == '*')) {
+
+        lcd.clear(); loop();
+      }
+		cylon_cc2();
+ 
+  FastLED.show();
+    displayPatternChase(convKeyP,  "Cylon");
+  }
+
+****************************************************
+  // *********            SPEED          ***********
+  speedUpButton = digitalRead (speedUpPin);
+  speedDownButton = digitalRead (speedDownPin);
+  
+  if (speedUpButton == LOW) {
+    SpeedRate = SpeedRate + 6;
+    if (SpeedRate >= 500) {
+      SpeedRate = 0;
+    }
+  }
+  else if (speedDownButton == LOW) {
+    SpeedRate = SpeedRate - 6;
+    if (SpeedRate < 0 ) {
+      SpeedRate = 0;
+    }
+  }
+//    else if (SpeedRate100 >= 0) {
+ //         SpeedRate = SpeedRate - 500;
+ //         if (SpeedRate100 < 500) {
+  //          SpeedRate = 0;
+  //    }
+  //  }
+  Speed = map(SpeedRate, 0, 512, 100, 0);
+ // delay(10);
+  FastLED.delay(SpeedRate);
+//  END
